@@ -1,20 +1,39 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Blank
+      Games
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content>
+  <!-- <ul>
+    @for(game of games; track game.id){
+      <li>
+        <img src="{{game.background_image}}">
+        <p>{{game.name}}</p>
+      </li>
+    }
+  </ul> -->
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-  </div>
+  <ion-grid>
+    <ion-row>
+      @for(game of games; track game.id){
+        <ion-col size='12' size-lg="3" size-md="4">
+      <ion-card color="warning">
+        <div class="img-container">
+          <img alt="Poster of game" src={{game.background_image}} width="300px" height="200px" />
+        </div>
+        
+        <ion-card-header>
+          <ion-card-title>{{game.name}}</ion-card-title>
+        </ion-card-header>
+   
+
+    </ion-card>
+     </ion-col>
+    }
+     </ion-row>
+  </ion-grid>
+  <a [routerLink]="['/page2']" class="ion-text-center">1</a>
 </ion-content>

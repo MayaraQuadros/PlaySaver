@@ -25,3 +25,15 @@
 #container a {
   text-decoration: none;
 }
+
+ion-card img{
+  width: 90%;
+  height: 200px;
+  align-content: center;
+}
+
+.img-container {
+  display: flex;
+  justify-content: center;   
+  margin-top: 5px;    
+}
