@@ -6,10 +6,24 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class GameService {
+   page:number = 1;
+
   constructor(private httpClient:HttpClient){}
 
-  GetGameData():Observable<any>{
-    return this.httpClient.get('https://api.rawg.io/api/games?key=38044ee04e384c09a6655fa5a5af962c')
+  GetGameData(page:number):Observable<any>{
+    return this.httpClient.get(`https://api.rawg.io/api/games?key=38044ee04e384c09a6655fa5a5af962c&page=${page}`)
+  }
+
+  nextPage()
+  {
+    this.page++;
+    
+  }
+
+  prevPage()
+  {
+    if(this.page > 1)
+      this.page--;
   }
   
 }

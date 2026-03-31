@@ -11,7 +11,7 @@ export const routes: Routes = [
     pathMatch: 'full',
   },
   {
-    path: 'page2',
-    loadComponent: () => import('./page2/page2.page').then( m => m.Page2Page)
+    path: 'game-details-page',
+    loadComponent: () => import('./game-details-page/game-details-page.page').then( m => m.GameDetailsPagePage)
   },
 ];

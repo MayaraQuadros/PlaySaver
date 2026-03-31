@@ -17,10 +17,11 @@
   </ul> -->
 
   <ion-grid>
+    <ion-row></ion-row>
     <ion-row>
       @for(game of games; track game.id){
         <ion-col size='12' size-lg="3" size-md="4">
-      <ion-card color="warning">
+      <ion-card color="warning" routeLink="['/gameDetailsPage']">
         <div class="img-container">
           <img alt="Poster of game" src={{game.background_image}} width="300px" height="200px" />
         </div>
@@ -34,6 +35,9 @@
      </ion-col>
     }
      </ion-row>
+     <ion-row class="ion-padding-top ion-padding-bottom ion-justify-content-between" >
+        <ion-button class="size-btn" (click)="onPrevButton()" shape="round">Previous</ion-button>
+        <ion-button class="size-btn" (click)="onNextButton()" shape="round">Next</ion-button>
+</ion-row>
   </ion-grid>
-  <a [routerLink]="['/page2']" class="ion-text-center">1</a>
 </ion-content>
