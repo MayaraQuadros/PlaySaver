@@ -14,6 +14,10 @@ export class GameService {
     return this.httpClient.get(`https://api.rawg.io/api/games?key=38044ee04e384c09a6655fa5a5af962c&page=${page}`)
   }
 
+  GetGameDetails(id:number):Observable<any>{
+    return this.httpClient.get(`https://api.rawg.io/api/games/${id}?key=38044ee04e384c09a6655fa5a5af962c`)
+  }
+
   nextPage()
   {
     this.page++;

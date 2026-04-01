@@ -12,7 +12,7 @@
     <ion-row>
       @for(game of games; track game.id){
         <ion-col size='12' size-lg="3" size-md="4">
-      <ion-card color="warning" [routerLink]="['/game-details-page']">
+      <ion-card color="warning" [routerLink]="['/game-details-page', game.id]">
         <div class="img-container">
           <img alt="Poster of game" src={{game.background_image}} width="300px" height="200px" />
         </div>

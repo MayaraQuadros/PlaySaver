@@ -3,14 +3,26 @@
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
-    <ion-title>gameDetailsPage</ion-title>
+    <ion-title>Game Details</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">gameDetailsPage</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <ion-grid>
+    <ion-row>
+      <ion-col></ion-col>
+      <ion-col size=12 size-md="8">
+        <ion-card *ngIf="gameDetails">
+          <img alt="Game Image" src={{gameDetails.background_image}} />
+          <ion-card-header>
+            <ion-card-title>{{gameDetails.name}}</ion-card-title>
+            <ion-card-subtitle>Released year: {{gameDetails.released | date:'yyyy'}}</ion-card-subtitle>
+          </ion-card-header>
+          <ion-card-content [innerHTML]="gameDetails.description"></ion-card-content>
+          <ion-card-content>Price</ion-card-content>
+        </ion-card>
+      </ion-col>
+      <ion-col></ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>
