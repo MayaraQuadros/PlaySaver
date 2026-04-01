@@ -7,21 +7,12 @@
 </ion-header>
 
 <ion-content>
-  <!-- <ul>
-    @for(game of games; track game.id){
-      <li>
-        <img src="{{game.background_image}}">
-        <p>{{game.name}}</p>
-      </li>
-    }
-  </ul> -->
-
   <ion-grid>
     <ion-row></ion-row>
     <ion-row>
       @for(game of games; track game.id){
         <ion-col size='12' size-lg="3" size-md="4">
-      <ion-card color="warning" routeLink="['/gameDetailsPage']">
+      <ion-card color="warning" [routerLink]="['/game-details-page']">
         <div class="img-container">
           <img alt="Poster of game" src={{game.background_image}} width="300px" height="200px" />
         </div>
