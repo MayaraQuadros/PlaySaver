@@ -6,28 +6,29 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class GameService {
-   page:number = 1;
+  page: number = 1;
 
-  constructor(private httpClient:HttpClient){}
+  constructor(private httpClient: HttpClient) { }
 
-  GetGameData(page:number):Observable<any>{
+  GetGameData(page: number): Observable<any> {
     return this.httpClient.get(`https://api.rawg.io/api/games?key=38044ee04e384c09a6655fa5a5af962c&page=${page}`)
   }
 
-  GetGameDetails(id:number):Observable<any>{
+  GetGameDetails(id: number): Observable<any> {
     return this.httpClient.get(`https://api.rawg.io/api/games/${id}?key=38044ee04e384c09a6655fa5a5af962c`)
   }
-
-  nextPage()
-  {
-    this.page++;
-    
+  GetDeals(name: string): Observable<any> {
+    return this.httpClient.get(`https://www.cheapshark.com/api/1.0/games?title=${name}&exact=1`)
   }
 
-  prevPage()
-  {
-    if(this.page > 1)
+  nextPage() {
+    this.page++;
+
+  }
+
+  prevPage() {
+    if (this.page > 1)
       this.page--;
   }
-  
+
 }

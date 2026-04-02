@@ -12,41 +12,35 @@ import { IonButton } from '@ionic/angular/standalone';
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
-  imports: [IonButton, RouterLink, IonCol, IonGrid, IonRow ,IonCard, IonCardHeader, IonCardTitle, IonHeader, IonToolbar, IonTitle, IonContent],
+  imports: [IonButton, RouterLink, IonCol, IonGrid, IonRow, IonCard, IonCardHeader, IonCardTitle, IonHeader, IonToolbar, IonTitle, IonContent],
 })
 export class HomePage {
-  games:any[]=[];
- 
-  
-  constructor(private gameService:GameService) {}
-    
-  ionViewWillEnter()
-  {
+  games: any[] = [];
+
+
+  constructor(private gameService: GameService) { }
+
+  ionViewWillEnter() {
     this.loadGames();
   }
 
-  loadGames(){
+  loadGames() {
     this.gameService.GetGameData(this.gameService.page).subscribe(
-      (data)=>{
+      (data) => {
         this.games = data.results;
         console.log(this.games);
       }
     )
   }
 
-  onPrevButton(){
+  onPrevButton() {
     this.gameService.prevPage();
     this.loadGames();
   }
 
-  onNextButton(){
+  onNextButton() {
     this.gameService.nextPage();
     this.loadGames();
 
   }
-
-  
-    
-  
-
 }

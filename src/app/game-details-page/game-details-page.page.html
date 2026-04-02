@@ -19,7 +19,10 @@
             <ion-card-subtitle>Released year: {{gameDetails.released | date:'yyyy'}}</ion-card-subtitle>
           </ion-card-header>
           <ion-card-content [innerHTML]="gameDetails.description"></ion-card-content>
-          <ion-card-content>Price</ion-card-content>
+          <ion-button *ngIf="hasDeal" class="size-btn"
+            href="https://www.cheapshark.com/redirect?dealID={{searchGames[index].cheapestDealID}}" target="_blank"
+            shape="round">View Deal</ion-button>
+
         </ion-card>
       </ion-col>
       <ion-col></ion-col>

@@ -19,7 +19,11 @@ import { IonCol, IonGrid, IonRow } from '@ionic/angular/standalone';
 export class GameDetailsPagePage implements OnInit {
 
   gameId:number = 0;
+  gameName:string = "";
   gameDetails:any;
+  searchGames:any[]=[];
+  index:number = 0;
+  hasDeal:boolean = false;
   
 
   constructor(private route: ActivatedRoute, private gameService:GameService) { }
@@ -28,16 +32,37 @@ export class GameDetailsPagePage implements OnInit {
   }
 
   ionViewWillEnter(){
+    this.gameDetails = [];
+    this.searchGames = [];
     this.gameId = Number(this.route.snapshot.paramMap.get('id'));
+    this.gameName = this.route.snapshot.paramMap.get('name') ?? "";
 
    
       this.gameService.GetGameDetails(this.gameId).subscribe(
-      (data) => { 
-        this.gameDetails = data; 
+      (gameData) => { 
+        this.gameDetails = gameData; 
         console.log(this.gameDetails);
       }
     )
+
+    this.gameService.GetDeals(this.gameName).subscribe(
+      (dealsData)=>{
+        this.searchGames = dealsData;
+        console.log(this.searchGames);
+        for(let i = 0; i < this.searchGames.length; i++){
+      if(this.gameName == this.searchGames[i].external)
+      {
+        this.index = i;
+        this.hasDeal = true;
+      }
     }
+      }
+    )
+
+    
+    }
+
+    
     
     
   
