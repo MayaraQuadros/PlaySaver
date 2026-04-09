@@ -19,13 +19,36 @@
             <ion-card-subtitle>Released year: {{gameDetails.released | date:'yyyy'}}</ion-card-subtitle>
           </ion-card-header>
           <ion-card-content [innerHTML]="gameDetails.description"></ion-card-content>
-          <ion-button *ngIf="hasDeal" class="size-btn"
-            href="https://www.cheapshark.com/redirect?dealID={{searchGames[index].cheapestDealID}}" target="_blank"
+          <ion-button *ngIf="hasDeal" color="danger" class="size-btn"
+            href="https://www.cheapshark.com/redirect?dealID={{arrayGames[index].cheapestDealID}}" target="_blank"
             shape="round">View Deal</ion-button>
-
         </ion-card>
       </ion-col>
       <ion-col></ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-grid >
+    <ion-row class="ion-justify-content-center dlc-title" padding-bottom="20px">
+      <ion-text >
+        <h2>DLC's</h2>
+      </ion-text>
+    </ion-row>
+    <ion-row>
+      @for(dlc of arrayDlc; track dlc){
+        <ion-col class="dlc-col" size="4" size-md="3">
+        <ion-card class="dlc-cards">
+        <img alt="Game Image" src={{dlc.background_image}} />
+        <ion-card-header>
+            <ion-card-title>{{dlc.name}}</ion-card-title>
+          </ion-card-header>
+
+
+        </ion-card>
+        </ion-col>
+      }
+      
+      
+      
     </ion-row>
   </ion-grid>
 </ion-content>

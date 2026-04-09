@@ -8,7 +8,10 @@
 
 <ion-content>
   <ion-grid>
-    <ion-row></ion-row>
+    <ion-row>
+      <ion-searchbar show-clear-button="focus" placeholder="Search" [debounce]="500"
+        (ionInput)="searchGames($event)"></ion-searchbar>
+    </ion-row>
     <ion-row>
       @for(game of games; track game.id){
       <ion-col size='12' size-lg="3" size-md="4">
@@ -26,9 +29,14 @@
       </ion-col>
       }
     </ion-row>
-    <ion-row class="ion-padding-top ion-padding-bottom ion-justify-content-between">
-      <ion-button class="size-btn" (click)="onPrevButton()" shape="round">Previous</ion-button>
-      <ion-button class="size-btn" (click)="onNextButton()" shape="round">Next</ion-button>
-    </ion-row>
   </ion-grid>
 </ion-content>
+
+<ion-toolbar>
+  <ion-buttons slot="start">
+    <ion-button class="size-btn" shape="round" fill="solid" color="success" (click)="onPrevButton()">Previous</ion-button>
+  </ion-buttons>
+  <ion-buttons slot="end">
+    <ion-button class="size-btn" shape="round" fill="solid" color="success" (click)="onNextButton()">Next</ion-button>
+  </ion-buttons>
+</ion-toolbar>

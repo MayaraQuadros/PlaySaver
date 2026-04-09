@@ -10,8 +10,19 @@ export class GameService {
 
   constructor(private httpClient: HttpClient) { }
 
-  GetGameData(page: number): Observable<any> {
-    return this.httpClient.get(`https://api.rawg.io/api/games?key=38044ee04e384c09a6655fa5a5af962c&page=${page}`)
+  GetGameData(page: number | string): Observable<any> {
+    if (typeof page === 'number') {
+      return this.httpClient.get(`https://api.rawg.io/api/games?key=38044ee04e384c09a6655fa5a5af962c&page=${page}`)
+    }
+    else {
+      console.log("string triggered");
+      return this.httpClient.get(`https://api.rawg.io/api/games?key=38044ee04e384c09a6655fa5a5af962c&search=${page}`)
+    }
+  }
+
+  GetGameDlc(id:number):Observable<any>{
+      return this.httpClient.get(`https://api.rawg.io/api/games/${id}/additions?key=38044ee04e384c09a6655fa5a5af962c`)
+
   }
 
   GetGameDetails(id: number): Observable<any> {

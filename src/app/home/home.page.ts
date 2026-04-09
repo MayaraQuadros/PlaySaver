@@ -1,10 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { IonHeader, IonToolbar, IonTitle, IonContent } from '@ionic/angular/standalone';
 import { GameService } from '../services/game-service';
 import { IonCard, IonCardHeader, IonCardTitle } from '@ionic/angular/standalone';
 import { IonCol, IonGrid, IonRow } from '@ionic/angular/standalone';
 import { RouterLink } from '@angular/router';
-import { IonButton } from '@ionic/angular/standalone';
+import { IonButton, IonButtons, IonSearchbar, IonProgressBar } from '@ionic/angular/standalone';
 
 
 
@@ -12,16 +12,21 @@ import { IonButton } from '@ionic/angular/standalone';
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
-  imports: [IonButton, RouterLink, IonCol, IonGrid, IonRow, IonCard, IonCardHeader, IonCardTitle, IonHeader, IonToolbar, IonTitle, IonContent],
+  imports: [IonProgressBar, IonSearchbar, IonButton, IonButtons, RouterLink, IonCol, IonGrid, IonRow, IonCard, IonCardHeader, IonCardTitle, IonHeader, IonToolbar, IonTitle, IonContent],
 })
 export class HomePage {
+  @ViewChild(IonContent) content!: IonContent;
   games: any[] = [];
+  searchWord: string = "";
 
 
   constructor(private gameService: GameService) { }
 
   ionViewWillEnter() {
-    this.loadGames();
+    if(this.searchWord == "")
+      this.loadGames();
+    else
+      this.searchGames(this.searchWord);
   }
 
   loadGames() {
@@ -36,11 +41,27 @@ export class HomePage {
   onPrevButton() {
     this.gameService.prevPage();
     this.loadGames();
+    this.content.scrollToTop(500);
+    
+    
   }
 
   onNextButton() {
     this.gameService.nextPage();
     this.loadGames();
+    this.content.scrollToTop(1000);
+  }
 
+  searchGames(event: any) {
+    //this.games = [];
+    let word = event.detail.value;
+    this.searchWord = word;
+    if (this.searchWord != " ") {
+      this.gameService.GetGameData(this.searchWord).subscribe(
+        (gameData) => {
+          this.games = gameData.results;
+        }
+      );
+    }
   }
 }
