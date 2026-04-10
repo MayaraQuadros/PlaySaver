@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonText,IonButton, IonButtons, IonBackButton, IonContent, IonHeader, IonTitle, IonToolbar } from '@ionic/angular/standalone';
-import { ActivatedRoute } from '@angular/router';
-import { IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle } from '@ionic/angular/standalone';
+import { IonText, IonButton, IonButtons, IonBackButton, IonContent, IonHeader, IonTitle, IonToolbar } from '@ionic/angular/standalone';
+import { ActivatedRoute, RouterLink } from '@angular/router';
+import { IonIcon, IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle } from '@ionic/angular/standalone';
 import { GameService } from '../services/game-service';
 import { IonCol, IonGrid, IonRow } from '@ionic/angular/standalone';
+import { home } from 'ionicons/icons';
+import { addIcons } from 'ionicons';
 
 
 
@@ -14,7 +16,7 @@ import { IonCol, IonGrid, IonRow } from '@ionic/angular/standalone';
   templateUrl: './game-details-page.page.html',
   styleUrls: ['./game-details-page.page.scss'],
   standalone: true,
-  imports: [IonText,IonCol, IonGrid, IonRow, IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle, IonButton, IonButtons, IonBackButton, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule]
+  imports: [IonIcon, RouterLink, IonText, IonCol, IonGrid, IonRow, IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle, IonButton, IonButtons, IonBackButton, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule]
 })
 export class GameDetailsPagePage implements OnInit {
 
@@ -25,9 +27,12 @@ export class GameDetailsPagePage implements OnInit {
   arrayDlc: any[] = [];
   index: number = 0;
   hasDeal: boolean = false;
+  hasDlc: boolean = false;
 
 
-  constructor(private route: ActivatedRoute, private gameService: GameService) { }
+  constructor(private route: ActivatedRoute, private gameService: GameService) {
+    addIcons({ home });
+  }
 
   ngOnInit() {
   }
@@ -60,10 +65,13 @@ export class GameDetailsPagePage implements OnInit {
     )
 
     this.gameService.GetGameDlc(this.gameId).subscribe(
-      (dlcData) =>{
+      (dlcData) => {
         this.arrayDlc = dlcData.results;
+        if (this.arrayDlc.length > 0)
+          this.hasDlc = true;
         console.log(this.arrayDlc);
       }
     )
   }
+
 }
