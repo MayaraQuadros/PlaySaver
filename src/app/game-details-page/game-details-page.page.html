@@ -20,7 +20,7 @@
         <ion-card *ngIf="gameDetails">
           <img alt="Game Image" src={{gameDetails.background_image}} />
           <ion-card-header>
-            <ion-card-title>{{gameDetails.name}}</ion-card-title>
+            <ion-card-title class="game-title">{{gameDetails.name}}</ion-card-title>
             <ion-card-subtitle>Released year: {{gameDetails.released | date:'yyyy'}}</ion-card-subtitle>
           </ion-card-header>
           <ion-card-content [innerHTML]="gameDetails.description"></ion-card-content>
@@ -38,13 +38,13 @@
         <h2>DLC's</h2>
       </ion-text>
     </ion-row>
-    <ion-row>
+    <ion-row class="ion-justify-content-center">
       @for(dlc of arrayDlc; track dlc){
-        <ion-col class="dlc-col" size="4" size-md="3">
+        <ion-col class="dlc-col ion-text-center" size="12" size-md="3">
         <ion-card class="dlc-cards" [routerLink]="['/game-details-page', dlc.id, dlc.name]">
         <img alt="Game Image" src={{dlc.background_image}} />
         <ion-card-header>
-            <ion-card-title>{{dlc.name}}</ion-card-title>
+            <ion-card-title class="dlc-game-title">{{dlc.name}}</ion-card-title>
           </ion-card-header>
 
 

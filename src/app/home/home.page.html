@@ -21,9 +21,12 @@
           </div>
 
           <ion-card-header>
-            <ion-card-title>{{game.name}}</ion-card-title>
+            <ion-card-title class="game-title">{{game.name}}</ion-card-title>
           </ion-card-header>
-
+          <ion-row class="ion-justify-content-end">
+            <ion-icon name="heart" size="large" color="light"></ion-icon>
+          </ion-row>
+         
 
         </ion-card>
       </ion-col>
@@ -34,9 +37,16 @@
 
 <ion-toolbar>
   <ion-buttons slot="start">
-    <ion-button class="size-btn" shape="round" fill="solid" color="success" (click)="onPrevButton()">Previous</ion-button>
+    <ion-button class="size-btn" shape="round"  (click)="onPrevButton()">
+      <ion-icon name="chevron-back-outline"></ion-icon>
+      Previous
+    </ion-button>
   </ion-buttons>
   <ion-buttons slot="end">
-    <ion-button class="size-btn" shape="round" fill="solid" color="success" (click)="onNextButton()">Next</ion-button>
+    <ion-button class="size-btn" shape="round" (click)="onNextButton()">
+      Next
+       <ion-icon  name="chevron-forward-outline"></ion-icon>
+       
+      </ion-button>
   </ion-buttons>
 </ion-toolbar>

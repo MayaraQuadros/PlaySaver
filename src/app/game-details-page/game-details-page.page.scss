@@ -27,4 +27,12 @@ ion-card {
 .size-btn {
   width: 150px;
 }
+.game-title{
+    font-size: clamp(24px, 4vw, 32px);
+
+}
+.dlc-game-title {
+  /* Minimum: 18px, Preferred: 4% of screen width, Maximum: 32px */
+  font-size: clamp(14px, 4vw, 20px);
+}
 

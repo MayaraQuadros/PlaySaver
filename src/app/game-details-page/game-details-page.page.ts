@@ -25,6 +25,7 @@ export class GameDetailsPagePage implements OnInit {
   gameDetails: any;
   arrayGames: any[] = [];
   arrayDlc: any[] = [];
+  arrayDeals: any[] = [];
   index: number = 0;
   hasDeal: boolean = false;
   hasDlc: boolean = false;
@@ -73,5 +74,4 @@ export class GameDetailsPagePage implements OnInit {
       }
     )
   }
-
 }

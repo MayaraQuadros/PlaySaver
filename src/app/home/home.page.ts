@@ -1,10 +1,12 @@
 import { Component, ViewChild } from '@angular/core';
 import { IonHeader, IonToolbar, IonTitle, IonContent } from '@ionic/angular/standalone';
 import { GameService } from '../services/game-service';
-import { IonCard, IonCardHeader, IonCardTitle } from '@ionic/angular/standalone';
+import { IonCardContent, IonCard, IonCardHeader, IonCardTitle } from '@ionic/angular/standalone';
 import { IonCol, IonGrid, IonRow } from '@ionic/angular/standalone';
 import { RouterLink } from '@angular/router';
-import { IonButton, IonButtons, IonSearchbar, IonProgressBar } from '@ionic/angular/standalone';
+import { IonIcon, IonButton, IonButtons, IonSearchbar } from '@ionic/angular/standalone';
+import { addIcons } from 'ionicons';
+import { chevronBackOutline, chevronForwardOutline, heart, pricetagOutline } from 'ionicons/icons';
 
 
 
@@ -12,7 +14,7 @@ import { IonButton, IonButtons, IonSearchbar, IonProgressBar } from '@ionic/angu
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
-  imports: [IonProgressBar, IonSearchbar, IonButton, IonButtons, RouterLink, IonCol, IonGrid, IonRow, IonCard, IonCardHeader, IonCardTitle, IonHeader, IonToolbar, IonTitle, IonContent],
+  imports: [ IonCardContent, IonIcon, IonSearchbar, IonButton, IonButtons, RouterLink, IonCol, IonGrid, IonRow, IonCard, IonCardHeader, IonCardTitle, IonHeader, IonToolbar, IonTitle, IonContent],
 })
 export class HomePage {
   @ViewChild(IonContent) content!: IonContent;
@@ -20,13 +22,16 @@ export class HomePage {
   searchWord: string = "";
 
 
-  constructor(private gameService: GameService) { }
+  constructor(private gameService: GameService) { 
+    addIcons({heart, chevronBackOutline, chevronForwardOutline, pricetagOutline})
+  }
 
   ionViewWillEnter() {
     if(this.searchWord == "")
       this.loadGames();
     else
       this.searchGames(this.searchWord);
+    
   }
 
   loadGames() {
@@ -37,6 +42,8 @@ export class HomePage {
       }
     )
   }
+
+
 
   onPrevButton() {
     this.gameService.prevPage();
@@ -53,7 +60,6 @@ export class HomePage {
   }
 
   searchGames(event: any) {
-    //this.games = [];
     let word = event.detail.value;
     this.searchWord = word;
     if (this.searchWord != " ") {
