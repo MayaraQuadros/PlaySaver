@@ -41,10 +41,16 @@ ion-icon {
   margin-right: 10px;
 }
 
+ion-row[routerLink] {
+  cursor: pointer ;
+  transition: opacity 0.2s;
+}
+
 .img-container {
   display: flex;
   justify-content: center;   
-  margin-top: 5px;    
+  margin-top: 5px;
+  cursor: pointer;   
 }
 
 .size-btn {

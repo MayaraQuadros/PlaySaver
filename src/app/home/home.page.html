@@ -15,18 +15,22 @@
     <ion-row>
       @for(game of games; track game.id){
       <ion-col size='12' size-lg="3" size-md="4">
-        <ion-card color="warning" [routerLink]="['/game-details-page', game.id, game.name]">
-          <div class="img-container">
+        <ion-card color="warning" >
+          <ion-row [routerLink]="['/game-details-page', game.id, game.name]">
+            <div class="img-container">
             <img alt="Poster of game" src={{game.background_image}} width="300px" height="200px" />
           </div>
-
           <ion-card-header>
             <ion-card-title class="game-title">{{game.name}}</ion-card-title>
           </ion-card-header>
-          <ion-row class="ion-justify-content-end">
-            <ion-icon name="heart" size="large" color="light"></ion-icon>
           </ion-row>
-         
+          
+          <ion-row class="ion-justify-content-end">
+            <ion-button  fill="clear" (click)="favouriteClicked($event, game)">
+              <ion-icon slot="icon-only" name="heart" size="large" [color]="game.isFav ? 'danger' : 'light'"></ion-icon>
+            </ion-button>
+          </ion-row>
+
 
         </ion-card>
       </ion-col>
@@ -37,7 +41,7 @@
 
 <ion-toolbar>
   <ion-buttons slot="start">
-    <ion-button class="size-btn" shape="round"  (click)="onPrevButton()">
+    <ion-button class="size-btn" shape="round" (click)="onPrevButton()">
       <ion-icon name="chevron-back-outline"></ion-icon>
       Previous
     </ion-button>
@@ -45,8 +49,8 @@
   <ion-buttons slot="end">
     <ion-button class="size-btn" shape="round" (click)="onNextButton()">
       Next
-       <ion-icon  name="chevron-forward-outline"></ion-icon>
-       
-      </ion-button>
+      <ion-icon name="chevron-forward-outline"></ion-icon>
+
+    </ion-button>
   </ion-buttons>
 </ion-toolbar>
