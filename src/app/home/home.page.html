@@ -13,6 +13,9 @@
         (ionInput)="searchGames($event)"></ion-searchbar>
     </ion-row>
     <ion-row>
+      <button>favourite</button>
+    </ion-row>
+    <ion-row>
       @for(game of games; track game.id){
       <ion-col size='12' size-lg="3" size-md="4">
         <ion-card color="warning" >

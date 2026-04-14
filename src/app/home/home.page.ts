@@ -7,6 +7,7 @@ import { RouterLink } from '@angular/router';
 import { IonIcon, IonButton, IonButtons, IonSearchbar } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import { chevronBackOutline, chevronForwardOutline, heart, pricetagOutline } from 'ionicons/icons';
+import { Storage } from '@ionic/storage-angular';
 
 
 @Component({
@@ -22,8 +23,9 @@ export class HomePage {
   favouriteArray: any[] = [];
 
 
-  constructor(private gameService: GameService) {
+  constructor(private gameService: GameService, private storage: Storage) {
     addIcons({ heart, chevronBackOutline, chevronForwardOutline, pricetagOutline })
+    this.storage.create();
   }
 
   ionViewWillEnter() {
@@ -39,6 +41,15 @@ export class HomePage {
       (data) => {
         this.games = data.results;
         console.log(this.games);
+        for(let j = 0; j < this.favouriteArray.length; j++)
+        {
+          for(let i = 0; i < this.games.length; i++)
+          {
+            if(this.favouriteArray[j].id == this.games[i].id){
+              this.games[i].isFav = true;
+            }
+          }
+        }
       }
     )
   }
@@ -79,11 +90,27 @@ export class HomePage {
     }
     else {
       game.isFav = true;
-      this.favouriteArray.push(game);
+      if(this.favouriteArray.includes(game) == false)
+      {
+        console.log("inside false");
+        this.favouriteArray.push(game);
+        this.saveFavourite();
+      }
+      else{
+        console.log("inside true");
+      }
     }
     console.log(this.favouriteArray);
   }
+
+  async saveFavourite(){
+    await this.storage.set("favouriteGames", this.favouriteArray);
+  }
   
+  async ionViewDidEnter(){
+    this.favouriteArray = await this.storage.get("favouriteGames");
+    console.log(this.favouriteArray);
+  }
 
 }
 
