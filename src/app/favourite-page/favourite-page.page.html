@@ -4,10 +4,10 @@
       Games
     </ion-title>
     <ion-buttons slot="end">
-       <ion-button (click)="goFirstPage()" shape="round">
+       <ion-button shape="round" [routerLink]="['/favourite-page']">
         <ion-icon slot="icon-only" name="heart"></ion-icon>
       </ion-button>
-      <ion-button (click)="goFirstPage()" shape="round">
+      <ion-button shape="round">
         <ion-icon slot="icon-only" name="home"></ion-icon>
       </ion-button>
     </ion-buttons>
@@ -18,10 +18,10 @@
   <ion-grid>
     <ion-row>
       <ion-searchbar show-clear-button="focus" placeholder="Search" [debounce]="500"
-        (ionInput)="searchGames($event)"></ion-searchbar>
+        ></ion-searchbar>
     </ion-row>
     <ion-row>
-      <button (click)="getFavourite()">favourite</button>
+      <button ></button>
     </ion-row>
     <ion-row>
       @for(game of games; track game.id){
@@ -38,7 +38,7 @@
             </ion-card-header>
           </ion-row>
           <ion-row class="ion-justify-content-end">
-            <ion-button fill="clear" (click)="favouriteClicked($event, game)">
+            <ion-button fill="clear" >
               <ion-icon class="favBtn" slot="icon-only" name="heart" size="large"
                 [color]="game.isFav ? 'danger' : 'light'"></ion-icon>
             </ion-button>
@@ -54,13 +54,13 @@
 
 <ion-toolbar>
   <ion-buttons slot="start">
-    <ion-button class="size-btn" shape="round" (click)="onPrevButton()">
+    <ion-button class="size-btn" shape="round" >
       <ion-icon name="chevron-back-outline"></ion-icon>
       Previous
     </ion-button>
   </ion-buttons>
   <ion-buttons slot="end">
-    <ion-button class="size-btn" shape="round" (click)="onNextButton()">
+    <ion-button class="size-btn" shape="round" >
       Next
       <ion-icon name="chevron-forward-outline"></ion-icon>
 

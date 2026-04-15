@@ -36,11 +36,6 @@ ion-card-title {
   height: 50px;
 }
 
-ion-icon {
-  margin-bottom: 10px;
-  margin-right: 10px;
-}
-
 ion-row[routerLink] {
   cursor: pointer ;
   transition: opacity 0.2s;
@@ -51,6 +46,7 @@ ion-row[routerLink] {
   justify-content: center;   
   margin-top: 5px;
   cursor: pointer;   
+  max-width: 400px;
 }
 
 .size-btn {
@@ -60,4 +56,11 @@ ion-row[routerLink] {
 .game-title{
     font-size: clamp(24px, 5vw, 26px);
 
+}
+
+
+
+.favBtn {
+  margin-bottom: 10px;
+  margin-right: 10px;
 }

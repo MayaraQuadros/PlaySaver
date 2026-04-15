@@ -14,5 +14,9 @@ export const routes: Routes = [
     path: 'game-details-page/:id/:name',
     loadComponent: () => import('./game-details-page/game-details-page.page').then( m => m.GameDetailsPagePage)
   },
+  {
+    path: 'favourite-page',
+    loadComponent: () => import('./favourite-page/favourite-page.page').then( m => m.FavouritePagePage)
+  },
   
 ];

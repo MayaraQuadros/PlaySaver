@@ -6,7 +6,7 @@ import { IonCol, IonGrid, IonRow } from '@ionic/angular/standalone';
 import { RouterLink } from '@angular/router';
 import { IonIcon, IonButton, IonButtons, IonSearchbar } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
-import { chevronBackOutline, chevronForwardOutline, heart, pricetagOutline } from 'ionicons/icons';
+import { home, chevronBackOutline, chevronForwardOutline, heart, pricetagOutline } from 'ionicons/icons';
 import { Storage } from '@ionic/storage-angular';
 
 
@@ -20,11 +20,11 @@ export class HomePage {
   @ViewChild(IonContent) content!: IonContent;
   games: any[] = [];
   searchWord: string = "";
-  favouriteArray: any[] = [];
+  
 
 
   constructor(private gameService: GameService, private storage: Storage) {
-    addIcons({ heart, chevronBackOutline, chevronForwardOutline, pricetagOutline })
+    addIcons({ home, heart, chevronBackOutline, chevronForwardOutline, pricetagOutline })
     this.storage.create();
   }
 
@@ -41,20 +41,23 @@ export class HomePage {
       (data) => {
         this.games = data.results;
         console.log(this.games);
-        for(let j = 0; j < this.favouriteArray.length; j++)
-        {
-          for(let i = 0; i < this.games.length; i++)
-          {
-            if(this.favouriteArray[j].id == this.games[i].id){
-              this.games[i].isFav = true;
-            }
-          }
-        }
+        this.findFavourite();
       }
     )
   }
 
-
+  findFavourite()
+  {
+    for(let i = 0; i < this.gameService.favouriteArray.length; i++)
+        {
+          for(let j = 0; j < this.games.length; j++)
+          {
+            if(this.gameService.favouriteArray[i].id == this.games[j].id){
+              this.games[j].isFav = true;
+            }
+          }
+        }
+  }
 
   onPrevButton() {
     this.gameService.prevPage();
@@ -77,6 +80,7 @@ export class HomePage {
       this.gameService.GetGameData(this.searchWord).subscribe(
         (gameData) => {
           this.games = gameData.results;
+          this.findFavourite();
         }
       );
     }
@@ -85,31 +89,45 @@ export class HomePage {
   favouriteClicked(event: Event, game: any) {
     if (game.isFav) {
       game.isFav = false;
-      let index = this.favouriteArray.indexOf(game);
-      this.favouriteArray.splice(index, 1);
+      let index = this.gameService.favouriteArray.indexOf(game);
+      this.gameService.favouriteArray.splice(index, 1);
     }
     else {
       game.isFav = true;
-      if(this.favouriteArray.includes(game) == false)
+      if(this.gameService.favouriteArray.includes(game) == false)
       {
         console.log("inside false");
-        this.favouriteArray.push(game);
+        this.gameService.favouriteArray.push(game);
         this.saveFavourite();
       }
       else{
         console.log("inside true");
       }
     }
-    console.log(this.favouriteArray);
+    console.log(this.gameService.favouriteArray);
   }
 
   async saveFavourite(){
-    await this.storage.set("favouriteGames", this.favouriteArray);
+    await this.storage.set("favouriteGames", this.gameService.favouriteArray);
   }
   
   async ionViewDidEnter(){
-    this.favouriteArray = await this.storage.get("favouriteGames");
-    console.log(this.favouriteArray);
+    this.gameService.favouriteArray = await this.storage.get("favouriteGames");
+    console.log(this.gameService.favouriteArray);
+  }
+
+  getFavourite(){
+    console.log(this.gameService.favouriteArray);
+  }
+
+  goFirstPage(){
+    this.gameService.GetGameData(1).subscribe(
+      (data) => {
+        this.games = data.results;
+        console.log(this.games);
+        this.findFavourite();
+      }
+    )
   }
 
 }

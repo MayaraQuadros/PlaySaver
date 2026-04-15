@@ -7,6 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class GameService {
   page: number = 1;
+  favouriteArray: any[] = [];
 
   constructor(private httpClient: HttpClient) { }
 
