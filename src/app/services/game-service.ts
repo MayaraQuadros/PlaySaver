@@ -9,6 +9,7 @@ export class GameService {
   page: number = 1;
   favouriteArray: any[] = [];
 
+
   constructor(private httpClient: HttpClient) { }
 
   GetGameData(page: number | string): Observable<any> {

@@ -20,7 +20,8 @@ export class HomePage {
   @ViewChild(IonContent) content!: IonContent;
   games: any[] = [];
   searchWord: string = "";
-  
+
+
 
 
   constructor(private gameService: GameService, private storage: Storage) {
@@ -46,17 +47,17 @@ export class HomePage {
     )
   }
 
-  findFavourite()
-  {
-    for(let i = 0; i < this.gameService.favouriteArray.length; i++)
-        {
-          for(let j = 0; j < this.games.length; j++)
-          {
-            if(this.gameService.favouriteArray[i].id == this.games[j].id){
-              this.games[j].isFav = true;
-            }
+  findFavourite() {
+    if (this.gameService.favouriteArray != null) {
+
+      for (let i = 0; i < this.gameService.favouriteArray.length; i++) {
+        for (let j = 0; j < this.games.length; j++) {
+          if (this.gameService.favouriteArray[i].id == this.games[j].id) {
+            this.games[j].isFav = true;
           }
         }
+      }
+    }
   }
 
   onPrevButton() {
@@ -94,33 +95,32 @@ export class HomePage {
     }
     else {
       game.isFav = true;
-      if(this.gameService.favouriteArray.includes(game) == false)
-      {
+      if (this.gameService.favouriteArray.includes(game) == false) {
         console.log("inside false");
         this.gameService.favouriteArray.push(game);
         this.saveFavourite();
       }
-      else{
+      else {
         console.log("inside true");
       }
     }
     console.log(this.gameService.favouriteArray);
   }
 
-  async saveFavourite(){
+  async saveFavourite() {
     await this.storage.set("favouriteGames", this.gameService.favouriteArray);
   }
-  
-  async ionViewDidEnter(){
+
+  async IonViewDidEnter() {
     this.gameService.favouriteArray = await this.storage.get("favouriteGames");
     console.log(this.gameService.favouriteArray);
   }
 
-  getFavourite(){
+  getFavourite() {
     console.log(this.gameService.favouriteArray);
   }
 
-  goFirstPage(){
+  goFirstPage() {
     this.gameService.GetGameData(1).subscribe(
       (data) => {
         this.games = data.results;
