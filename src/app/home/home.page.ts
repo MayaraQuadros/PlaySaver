@@ -25,7 +25,7 @@ export class HomePage {
     addIcons({ home, heart, chevronBackOutline, chevronForwardOutline, pricetagOutline })
   }
 
-   async ionViewWillEnter() {
+  async ionViewWillEnter() {
     await this.gameService.getFavourites();
     if (this.searchWord == "")
       this.loadGames();
@@ -36,7 +36,7 @@ export class HomePage {
 
   loadGames() {
     this.gameService.GetGameData(this.gameService.page).subscribe(
-      async (data) => {
+      (data) => {
         this.games = data.results;
         console.log(this.games);
         this.findFavourite();
@@ -85,23 +85,43 @@ export class HomePage {
   }
 
   favouriteClicked(event: Event, game: any) {
-    if (game.isFav) {
-      game.isFav = false;
-      let index = this.gameService.favouriteArray.indexOf(game);
-      this.gameService.favouriteArray.splice(index, 1);
-    }
-    else {
-      game.isFav = true;
-      if (this.gameService.favouriteArray.includes(game) == false) {
-        console.log("inside false");
-        this.gameService.favouriteArray.push(game);
+    if (this.gameService.favouriteArray != null) {
+      let index = -1;
+
+      for (let i = 0; i < this.gameService.favouriteArray.length; i++) {
+        if (this.gameService.favouriteArray[i].id == game.id) {
+          index = i;
+          break;
+        }
+      }
+      if (game.isFav) {
+        console.log(this.gameService.favouriteArray);
+        game.isFav = false;
+
+        this.gameService.favouriteArray.splice(index, 1);
         this.gameService.saveFavourite();
+        console.log("inside true");
+
+        console.log(game);
       }
       else {
-        console.log("inside true");
+        game.isFav = true;
+        if (index == -1) {
+          console.log("inside false");
+          this.gameService.favouriteArray.push(game);
+          this.gameService.saveFavourite();
+        }
       }
     }
-    console.log(this.gameService.favouriteArray);
+    else {
+      this.gameService.favouriteArray = [];
+      this.gameService.favouriteArray.push(game);
+      this.gameService.saveFavourite();
+
+    }
+
+
+
   }
 
   goFirstPage() {
@@ -114,7 +134,7 @@ export class HomePage {
     )
   }
 
-  getFavourite(){
+  getFavourite() {
     console.log(this.gameService.favouriteArray);
   }
 
