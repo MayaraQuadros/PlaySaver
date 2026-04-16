@@ -53,7 +53,9 @@ export class GameService {
     await this.storage.set("favouriteGames", this.favouriteArray);
   }
 
-   getFavourite() {
+  async getFavourites()
+  {
+    this.favouriteArray = await this.storage.get("favouriteGames");
     console.log(this.favouriteArray);
   }
 }

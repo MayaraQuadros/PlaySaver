@@ -7,6 +7,9 @@ import { IonCol, IonGrid, IonRow } from '@ionic/angular/standalone';
 import { IonIcon, IonButton, IonButtons, IonSearchbar } from '@ionic/angular/standalone';
 import { IonCardContent, IonCard, IonCardHeader, IonCardTitle } from '@ionic/angular/standalone';
 import { GameService } from '../services/game-service';
+import { addIcons } from 'ionicons';
+import { home, chevronBackOutline, chevronForwardOutline, heart, pricetagOutline } from 'ionicons/icons';
+
 
 
 
@@ -20,12 +23,23 @@ import { GameService } from '../services/game-service';
   imports: [IonCardContent, IonCard, IonCardHeader, IonCardTitle, IonSearchbar, IonCol, IonGrid, IonRow , IonIcon, RouterLink, IonButton, IonButtons, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule]
 })
 export class FavouritePagePage implements OnInit {
-  favouriteGames: any[] = this.gameService.favouriteArray;
 
-  constructor(private gameService: GameService) { }
+  constructor(public gameService: GameService) { 
+        addIcons({ home, heart, chevronBackOutline, chevronForwardOutline, pricetagOutline })
+
+    
+  }
 
   ngOnInit() {
 
+  }
+  async ionViewWillEnter(){
+    await this.gameService.getFavourites();
+
+  }
+
+   getFavourite(){
+    console.log(this.gameService.favouriteArray);
   }
 
   

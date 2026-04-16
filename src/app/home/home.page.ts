@@ -21,11 +21,12 @@ export class HomePage {
   games: any[] = [];
   searchWord: string = "";
 
-  constructor(private gameService: GameService, private storage: Storage) {
+  constructor(private gameService: GameService) {
     addIcons({ home, heart, chevronBackOutline, chevronForwardOutline, pricetagOutline })
   }
 
-  ionViewWillEnter() {
+   async ionViewWillEnter() {
+    await this.gameService.getFavourites();
     if (this.searchWord == "")
       this.loadGames();
     else
@@ -35,7 +36,7 @@ export class HomePage {
 
   loadGames() {
     this.gameService.GetGameData(this.gameService.page).subscribe(
-      (data) => {
+      async (data) => {
         this.games = data.results;
         console.log(this.games);
         this.findFavourite();
@@ -103,15 +104,6 @@ export class HomePage {
     console.log(this.gameService.favouriteArray);
   }
 
-  
-
-  async IonViewDidEnter() {
-    this.gameService.favouriteArray = await this.storage.get("favouriteGames");
-    console.log(this.gameService.favouriteArray);
-  }
-
- 
-
   goFirstPage() {
     this.gameService.GetGameData(1).subscribe(
       (data) => {
@@ -123,7 +115,7 @@ export class HomePage {
   }
 
   getFavourite(){
-    this.gameService.getFavourite;
+    console.log(this.gameService.favouriteArray);
   }
 
 }
