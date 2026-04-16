@@ -1,0 +1,29 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      My Favourite Games
+    </ion-title>
+    <ion-buttons slot="end">
+       <ion-button shape="round">
+        <ion-icon slot="icon-only" name="heart"></ion-icon>
+      </ion-button>
+      <ion-button shape="round" [routerLink]="['/']">
+        <ion-icon slot="icon-only" name="home"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    @for(game of favouriteGames; track game.id){
+      <ion-card>
+        <ion-col>
+          <div class="img-container">
+              <img  alt="Poster of Game" src="{{game.background_image}}"/>
+            </div>
+        </ion-col>
+      </ion-card>
+    }
+  </ion-grid>
+</ion-content>

@@ -5,6 +5,9 @@ import { IonContent, IonHeader, IonTitle, IonToolbar } from '@ionic/angular/stan
 import { RouterLink, } from '@angular/router';
 import { IonCol, IonGrid, IonRow } from '@ionic/angular/standalone';
 import { IonIcon, IonButton, IonButtons, IonSearchbar } from '@ionic/angular/standalone';
+import { IonCardContent, IonCard, IonCardHeader, IonCardTitle } from '@ionic/angular/standalone';
+import { GameService } from '../services/game-service';
+
 
 
 
@@ -14,13 +17,16 @@ import { IonIcon, IonButton, IonButtons, IonSearchbar } from '@ionic/angular/sta
   templateUrl: './favourite-page.page.html',
   styleUrls: ['./favourite-page.page.scss'],
   standalone: true,
-  imports: [IonSearchbar, IonCol, IonGrid, IonRow , IonIcon, RouterLink, IonButton, IonButtons, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule]
+  imports: [IonCardContent, IonCard, IonCardHeader, IonCardTitle, IonSearchbar, IonCol, IonGrid, IonRow , IonIcon, RouterLink, IonButton, IonButtons, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule]
 })
 export class FavouritePagePage implements OnInit {
+  favouriteGames: any[] = this.gameService.favouriteArray;
 
-  constructor() { }
+  constructor(private gameService: GameService) { }
 
   ngOnInit() {
+
   }
 
+  
 }
