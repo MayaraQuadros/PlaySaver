@@ -117,11 +117,7 @@ export class HomePage {
       this.gameService.favouriteArray = [];
       this.gameService.favouriteArray.push(game);
       this.gameService.saveFavourite();
-
     }
-
-
-
   }
 
   goFirstPage() {

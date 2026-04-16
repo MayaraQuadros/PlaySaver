@@ -4,7 +4,7 @@
       My Favourite Games
     </ion-title>
     <ion-buttons slot="end">
-       <ion-button shape="round">
+      <ion-button shape="round">
         <ion-icon slot="icon-only" name="heart"></ion-icon>
       </ion-button>
       <ion-button shape="round" [routerLink]="['/']">
@@ -15,18 +15,35 @@
 </ion-header>
 
 <ion-content>
-   <ion-row>
-      <button (click)="getFavourite()">favourite</button>
-    </ion-row>
+  <ion-row>
+    <button (click)="getFavourite()">favourite</button>
+  </ion-row>
+
+
+  <ion-row class="ion-justify-content-center favourite-title">
+
+    <h2>Favourite List</h2>
+
+  </ion-row>
   <ion-grid>
+    
     @for(game of gameService.favouriteArray; track game.id){
-      <ion-card>
-        <ion-col>
-          <div class="img-container">
-              <img  alt="Poster of Game" src="{{game.background_image}}" />
-            </div>
-        </ion-col>
-      </ion-card>
+      
+    <ion-card >
+      <ion-row class="ion-align-items-start" >
+      <ion-col size="5" size-md="4" size-lg="3" [routerLink]="['/game-details-page', game.id, game.name]">
+        <div class="img-container">
+          <img alt="Poster of Game" src="{{game.background_image}}" />
+        </div>
+      </ion-col>
+      <ion-col  class="ion-text-start">
+        <ion-card-title color="warning" class="game-title">{{game.name}}</ion-card-title>
+      </ion-col>
+      </ion-row>
+    </ion-card>
+
+
     }
+
   </ion-grid>
 </ion-content>

@@ -3,5 +3,30 @@
   justify-content: center;   
   margin-top: 5px;
   cursor: pointer;   
-  max-width: 400px;
+  max-width: auto;
+  max-height: 100px;
 }
+
+h2 {
+    font-size: 30px;
+}
+
+.favourite-title {
+    background-color: #ffc409;
+    color: black;
+    margin-top: 20px;
+}
+
+img {
+    max-width: 200px;
+    
+}
+
+.game-title{
+    padding-top: 5px;
+}
+
+
+
+
+

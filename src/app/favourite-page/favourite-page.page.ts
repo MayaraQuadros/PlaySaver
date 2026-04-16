@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonContent, IonHeader, IonTitle, IonToolbar } from '@ionic/angular/standalone';
 import { RouterLink, } from '@angular/router';
-import { IonCol, IonGrid, IonRow } from '@ionic/angular/standalone';
+import { IonText, IonCol, IonGrid, IonRow } from '@ionic/angular/standalone';
 import { IonIcon, IonButton, IonButtons, IonSearchbar } from '@ionic/angular/standalone';
 import { IonCardContent, IonCard, IonCardHeader, IonCardTitle } from '@ionic/angular/standalone';
 import { GameService } from '../services/game-service';
@@ -15,12 +15,13 @@ import { home, chevronBackOutline, chevronForwardOutline, heart, pricetagOutline
 
 
 
+
 @Component({
   selector: 'app-favourite-page',
   templateUrl: './favourite-page.page.html',
   styleUrls: ['./favourite-page.page.scss'],
   standalone: true,
-  imports: [IonCardContent, IonCard, IonCardHeader, IonCardTitle, IonSearchbar, IonCol, IonGrid, IonRow , IonIcon, RouterLink, IonButton, IonButtons, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule]
+  imports: [IonText, IonCardContent, IonCard, IonCardHeader, IonCardTitle, IonSearchbar, IonCol, IonGrid, IonRow , IonIcon, RouterLink, IonButton, IonButtons, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule]
 })
 export class FavouritePagePage implements OnInit {
 
