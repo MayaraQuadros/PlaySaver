@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { Storage } from '@ionic/storage-angular';
+
 
 @Injectable({
   providedIn: 'root',
@@ -10,7 +12,10 @@ export class GameService {
   favouriteArray: any[] = [];
 
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient, private storage: Storage) { 
+        this.storage.create();
+
+  }
 
   GetGameData(page: number | string): Observable<any> {
     if (typeof page === 'number') {
@@ -44,4 +49,11 @@ export class GameService {
       this.page--;
   }
 
+  async saveFavourite() {
+    await this.storage.set("favouriteGames", this.favouriteArray);
+  }
+
+   getFavourite() {
+    console.log(this.favouriteArray);
+  }
 }

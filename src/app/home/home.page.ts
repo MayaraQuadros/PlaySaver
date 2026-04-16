@@ -21,12 +21,8 @@ export class HomePage {
   games: any[] = [];
   searchWord: string = "";
 
-
-
-
   constructor(private gameService: GameService, private storage: Storage) {
     addIcons({ home, heart, chevronBackOutline, chevronForwardOutline, pricetagOutline })
-    this.storage.create();
   }
 
   ionViewWillEnter() {
@@ -98,7 +94,7 @@ export class HomePage {
       if (this.gameService.favouriteArray.includes(game) == false) {
         console.log("inside false");
         this.gameService.favouriteArray.push(game);
-        this.saveFavourite();
+        this.gameService.saveFavourite();
       }
       else {
         console.log("inside true");
@@ -107,18 +103,14 @@ export class HomePage {
     console.log(this.gameService.favouriteArray);
   }
 
-  async saveFavourite() {
-    await this.storage.set("favouriteGames", this.gameService.favouriteArray);
-  }
+  
 
   async IonViewDidEnter() {
     this.gameService.favouriteArray = await this.storage.get("favouriteGames");
     console.log(this.gameService.favouriteArray);
   }
 
-  getFavourite() {
-    console.log(this.gameService.favouriteArray);
-  }
+ 
 
   goFirstPage() {
     this.gameService.GetGameData(1).subscribe(
@@ -128,6 +120,10 @@ export class HomePage {
         this.findFavourite();
       }
     )
+  }
+
+  getFavourite(){
+    this.gameService.getFavourite;
   }
 
 }
