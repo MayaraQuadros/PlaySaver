@@ -1,28 +1,36 @@
 import { Component, ViewChild } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { IonHeader, IonToolbar, IonTitle, IonContent } from '@ionic/angular/standalone';
 import { GameService } from '../services/game-service';
-import { IonCardContent, IonCard, IonCardHeader, IonCardTitle } from '@ionic/angular/standalone';
+import { IonCard, IonCardHeader, IonCardTitle } from '@ionic/angular/standalone';
 import { IonCol, IonGrid, IonRow } from '@ionic/angular/standalone';
 import { RouterLink } from '@angular/router';
 import { IonIcon, IonButton, IonButtons, IonSearchbar } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
-import { home, chevronBackOutline, chevronForwardOutline, heart, pricetagOutline } from 'ionicons/icons';
+import { home, chevronBackOutline, chevronForwardOutline, heart, pricetagOutline, pricetag } from 'ionicons/icons';
 import { Storage } from '@ionic/storage-angular';
+import { find } from 'rxjs';
+
+
+
+
+
 
 
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
-  imports: [IonCardContent, IonIcon, IonSearchbar, IonButton, IonButtons, RouterLink, IonCol, IonGrid, IonRow, IonCard, IonCardHeader, IonCardTitle, IonHeader, IonToolbar, IonTitle, IonContent],
+  imports: [CommonModule, IonIcon, IonSearchbar, IonButton, IonButtons, RouterLink, IonCol, IonGrid, IonRow, IonCard, IonCardHeader, IonCardTitle, IonHeader, IonToolbar, IonTitle, IonContent],
 })
 export class HomePage {
   @ViewChild(IonContent) content!: IonContent;
   games: any[] = [];
+  dealsArray: number[] = [];
   searchWord: string = "";
 
   constructor(private gameService: GameService) {
-    addIcons({ home, heart, chevronBackOutline, chevronForwardOutline, pricetagOutline })
+    addIcons({ pricetag, home, heart, chevronBackOutline, chevronForwardOutline, pricetagOutline })
   }
 
   async ionViewWillEnter() {
@@ -40,6 +48,7 @@ export class HomePage {
         this.games = data.results;
         console.log(this.games);
         this.findFavourite();
+        this.searchDeal();
       }
     )
   }
@@ -54,6 +63,31 @@ export class HomePage {
           }
         }
       }
+    }
+  }
+
+ 
+
+  searchDeal(){
+    let dealGame: any[] = [];
+    for(let i = 0; i < this.games.length; i++)
+    {
+      this.gameService.GetDeals(this.games[i].name).subscribe(
+        (dealData)=>{
+          dealGame = dealData;
+        if(dealGame.length > 0)
+      {
+        this.dealsArray.push(this.games[i].id);
+        this.games[i].hasGameDeal = true;
+      }
+      else{
+        this.games[i].hasGameDeal = false;
+      }
+   
+      }
+          
+      );
+      
     }
   }
 
@@ -95,19 +129,14 @@ export class HomePage {
         }
       }
       if (game.isFav) {
-        console.log(this.gameService.favouriteArray);
         game.isFav = false;
 
         this.gameService.favouriteArray.splice(index, 1);
-        this.gameService.saveFavourite();
-        console.log("inside true");
-
-        console.log(game);
+        this.gameService.saveFavourite()
       }
       else {
         game.isFav = true;
         if (index == -1) {
-          console.log("inside false");
           this.gameService.favouriteArray.push(game);
           this.gameService.saveFavourite();
         }
@@ -124,14 +153,9 @@ export class HomePage {
     this.gameService.GetGameData(1).subscribe(
       (data) => {
         this.games = data.results;
-        console.log(this.games);
         this.findFavourite();
       }
     )
-  }
-
-  getFavourite() {
-    console.log(this.gameService.favouriteArray);
   }
 
 }

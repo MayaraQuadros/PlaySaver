@@ -24,9 +24,14 @@
             <ion-card-subtitle>Released year: {{gameDetails.released | date:'yyyy'}}</ion-card-subtitle>
           </ion-card-header>
           <ion-card-content [innerHTML]="gameDetails.description"></ion-card-content>
-          <ion-button *ngIf="hasDeal" color="danger" class="size-btn"
+            <ion-item lines="none">
+              <ion-button size="default" slot="start" *ngIf="hasDeal" color="danger" class="size-btn"
             href="https://www.cheapshark.com/redirect?dealID={{arrayGames[index].cheapestDealID}}" target="_blank"
             shape="round">View Deal</ion-button>
+              <ion-button size="default" shape="round" color="dark" slot="end" (click)="shareContent()">
+              <ion-icon slot="icon-only" name="share-outline"></ion-icon>
+            </ion-button>
+          </ion-item>
         </ion-card>
       </ion-col>
       <ion-col></ion-col>

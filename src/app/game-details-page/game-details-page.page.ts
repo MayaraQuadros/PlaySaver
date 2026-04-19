@@ -1,13 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonText, IonButton, IonButtons, IonBackButton, IonContent, IonHeader, IonTitle, IonToolbar } from '@ionic/angular/standalone';
+import { IonText, IonButton, IonButtons, IonBackButton, IonContent, IonHeader, IonTitle, IonToolbar, IonItem } from '@ionic/angular/standalone';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { IonIcon, IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle } from '@ionic/angular/standalone';
 import { GameService } from '../services/game-service';
 import { IonCol, IonGrid, IonRow } from '@ionic/angular/standalone';
-import { home } from 'ionicons/icons';
+import { home, shareOutline } from 'ionicons/icons';
 import { addIcons } from 'ionicons';
+import { Share } from '@capacitor/share';
+import { share } from 'rxjs';
+
 
 
 
@@ -16,7 +19,7 @@ import { addIcons } from 'ionicons';
   templateUrl: './game-details-page.page.html',
   styleUrls: ['./game-details-page.page.scss'],
   standalone: true,
-  imports: [IonIcon, RouterLink, IonText, IonCol, IonGrid, IonRow, IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle, IonButton, IonButtons, IonBackButton, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule]
+  imports: [IonIcon, RouterLink, IonText, IonCol, IonGrid, IonRow, IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle, IonButton, IonButtons, IonBackButton, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonItem]
 })
 export class GameDetailsPagePage implements OnInit {
 
@@ -32,7 +35,7 @@ export class GameDetailsPagePage implements OnInit {
 
 
   constructor(private route: ActivatedRoute, private gameService: GameService) {
-    addIcons({ home });
+    addIcons({ home, shareOutline });
   }
 
   ngOnInit() {
@@ -60,6 +63,7 @@ export class GameDetailsPagePage implements OnInit {
           if (this.gameName == this.arrayGames[i].external) {
             this.index = i;
             this.hasDeal = true;
+            console.log(dealsData);
           }
         }
       }
@@ -73,5 +77,12 @@ export class GameDetailsPagePage implements OnInit {
         console.log(this.arrayDlc);
       }
     )
+  }
+
+  async shareContent() {
+    await Share.share({
+       
+      url: `http://playsaver-c0422.web.app/game-details-page/${this.gameId}/${this.gameName}`,
+    });
   }
 }
