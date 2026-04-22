@@ -4,7 +4,7 @@
       Games
     </ion-title>
     <ion-buttons slot="end">
-       <ion-button [routerLink]="['/favourite-page']" shape="round">
+      <ion-button [routerLink]="['/favourite-page']" shape="round">
         <ion-icon slot="icon-only" name="heart"></ion-icon>
       </ion-button>
       <ion-button (click)="goFirstPage()" shape="round">
@@ -19,9 +19,6 @@
     <ion-row>
       <ion-searchbar show-clear-button="focus" placeholder="Search" [debounce]="500"
         (ionInput)="searchGames($event)"></ion-searchbar>
-    </ion-row>
-    <ion-row>
-      <button (click)="getFavourite()">favourite</button>
     </ion-row>
     <ion-row>
       @for(game of games; track game.id){
@@ -43,8 +40,6 @@
                 [color]="game.isFav ? 'danger' : 'light'"></ion-icon>
             </ion-button>
           </ion-row>
-
-
         </ion-card>
       </ion-col>
       }
@@ -63,7 +58,6 @@
     <ion-button class="size-btn" shape="round" (click)="onNextButton()">
       Next
       <ion-icon name="chevron-forward-outline"></ion-icon>
-
     </ion-button>
   </ion-buttons>
 </ion-toolbar>

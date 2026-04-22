@@ -26,7 +26,7 @@
   text-decoration: none;
 }
 
-ion-card img{
+ion-card img {
   width: 90%;
   height: 200px;
   align-content: center;
@@ -37,15 +37,15 @@ ion-card-title {
 }
 
 ion-row[routerLink] {
-  cursor: pointer ;
+  cursor: pointer;
   transition: opacity 0.2s;
 }
 
 .img-container {
   display: flex;
-  justify-content: center;   
+  justify-content: center;
   margin-top: 5px;
-  cursor: pointer;   
+  cursor: pointer;
   max-width: 400px;
 }
 
@@ -53,12 +53,10 @@ ion-row[routerLink] {
   width: 150px;
 }
 
-.game-title{
-    font-size: clamp(24px, 5vw, 26px);
+.game-title {
+  font-size: clamp(24px, 5vw, 26px);
 
 }
-
-
 
 .favBtn {
   margin-bottom: 10px;

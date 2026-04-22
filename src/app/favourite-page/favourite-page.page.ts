@@ -20,27 +20,17 @@ import { home, chevronBackOutline, chevronForwardOutline, heart, pricetagOutline
   templateUrl: './favourite-page.page.html',
   styleUrls: ['./favourite-page.page.scss'],
   standalone: true,
-  imports: [IonCardContent, IonCard, IonCardHeader, IonCardTitle, IonSearchbar, IonCol, IonGrid, IonRow , IonIcon, RouterLink, IonButton, IonButtons, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule]
+  imports: [IonCard, IonCardHeader, IonCardTitle, IonCol, IonGrid, IonRow, IonIcon, RouterLink, IonButton, IonButtons, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule]
 })
 export class FavouritePagePage implements OnInit {
 
-  constructor(public gameService: GameService) { 
-        addIcons({ home, heart, chevronBackOutline, chevronForwardOutline, pricetagOutline })
-
-    
+  constructor(public gameService: GameService) {
+    addIcons({ home, heart, chevronBackOutline, chevronForwardOutline, pricetagOutline })
   }
-
-  ngOnInit() {
-
-  }
-  async ionViewWillEnter(){
-    await this.gameService.getFavourites();
-
-  }
-
-   getFavourite(){
-    console.log(this.gameService.favouriteArray);
-  }
-
   
+  ngOnInit() {}
+
+  async ionViewWillEnter() {
+    await this.gameService.getFavourites();
+  }
 }

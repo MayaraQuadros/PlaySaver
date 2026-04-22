@@ -5,10 +5,10 @@
     </ion-buttons>
     <ion-title>Game Details</ion-title>
     <ion-buttons slot="end">
-    <ion-button shape="round" [routerLink]="['/']">
-      <ion-icon slot="icon-only" name="home"></ion-icon> 
-    </ion-button>
-  </ion-buttons>
+      <ion-button shape="round" [routerLink]="['/']">
+        <ion-icon slot="icon-only" name="home"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
@@ -24,9 +24,14 @@
             <ion-card-subtitle>Released year: {{gameDetails.released | date:'yyyy'}}</ion-card-subtitle>
           </ion-card-header>
           <ion-card-content [innerHTML]="gameDetails.description"></ion-card-content>
-          <ion-button *ngIf="hasDeal" color="danger" class="size-btn"
-            href="https://www.cheapshark.com/redirect?dealID={{arrayGames[index].cheapestDealID}}" target="_blank"
-            shape="round">View Deal</ion-button>
+          <ion-item lines="none">
+            <ion-button size="default" slot="start" *ngIf="hasDeal" color="danger" class="size-btn"
+              href="https://www.cheapshark.com/redirect?dealID={{arrayGames[index].cheapestDealID}}" target="_blank"
+              shape="round">View Deal</ion-button>
+            <ion-button size="default" shape="round" color="dark" slot="end" (click)="shareContent()">
+              <ion-icon slot="icon-only" name="share-outline"></ion-icon>
+            </ion-button>
+          </ion-item>
         </ion-card>
       </ion-col>
       <ion-col></ion-col>
@@ -34,26 +39,21 @@
   </ion-grid>
   <ion-grid *ngIf="hasDlc">
     <ion-row class="ion-justify-content-center dlc-title" padding-bottom="20px">
-      <ion-text >
+      <ion-text>
         <h2>DLC's</h2>
       </ion-text>
     </ion-row>
     <ion-row class="ion-justify-content-center">
       @for(dlc of arrayDlc; track dlc){
-        <ion-col class="dlc-col ion-text-center" size="12" size-md="3">
+      <ion-col class="dlc-col ion-text-center" size="12" size-md="3">
         <ion-card class="dlc-cards" [routerLink]="['/game-details-page', dlc.id, dlc.name]">
-        <img alt="Game Image" src={{dlc.background_image}} />
-        <ion-card-header>
+          <img alt="Game Image" src={{dlc.background_image}} />
+          <ion-card-header>
             <ion-card-title class="dlc-game-title">{{dlc.name}}</ion-card-title>
           </ion-card-header>
-
-
         </ion-card>
-        </ion-col>
+      </ion-col>
       }
-      
-      
-      
     </ion-row>
   </ion-grid>
 </ion-content>

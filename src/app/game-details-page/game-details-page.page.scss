@@ -1,7 +1,6 @@
 ion-card {
     margin-bottom: 120px;
     padding-bottom: 20px;
-    
 }
 
 .dlc-title {
@@ -12,8 +11,6 @@ ion-card {
     max-width: 300px;
     height:270px;
     margin-bottom: 30px;
-
-    
 }
 
 .dlc-col {
@@ -32,7 +29,6 @@ ion-card {
 
 }
 .dlc-game-title {
-  /* Minimum: 18px, Preferred: 4% of screen width, Maximum: 32px */
   font-size: clamp(14px, 4vw, 20px);
 }
 
