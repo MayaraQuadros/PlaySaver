@@ -6,7 +6,7 @@ import { ActivatedRoute, RouterLink } from '@angular/router';
 import { IonIcon, IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle } from '@ionic/angular/standalone';
 import { GameService } from '../services/game-service';
 import { IonCol, IonGrid, IonRow } from '@ionic/angular/standalone';
-import { home, shareOutline } from 'ionicons/icons';
+import { home, shareOutline, heart } from 'ionicons/icons';
 import { addIcons } from 'ionicons';
 import { Share } from '@capacitor/share';
 
@@ -31,7 +31,7 @@ export class GameDetailsPagePage implements OnInit {
 
 
   constructor(private route: ActivatedRoute, private gameService: GameService) {
-    addIcons({ home, shareOutline });
+    addIcons({ home, shareOutline, heart });
   }
 
   ngOnInit() {

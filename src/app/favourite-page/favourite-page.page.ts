@@ -33,4 +33,17 @@ export class FavouritePagePage implements OnInit {
   async ionViewWillEnter() {
     await this.gameService.getFavourites();
   }
+
+  favouriteClicked(event: Event, game: any) {
+    let index = -1;
+    game.isFav = false;
+    for(let i = 0; i < this.gameService.favouriteArray.length; i++)
+    {
+      if(this.gameService.favouriteArray[i].id == game.id)
+        index = i;
+    }
+    this.gameService.favouriteArray.splice(index, 1);
+    this.gameService.saveFavourite();
+
+  }
 }

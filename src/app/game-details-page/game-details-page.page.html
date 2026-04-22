@@ -4,7 +4,11 @@
       <ion-back-button></ion-back-button>
     </ion-buttons>
     <ion-title>Game Details</ion-title>
+    
     <ion-buttons slot="end">
+      <ion-button [routerLink]="['/favourite-page']" shape="round">
+        <ion-icon slot="icon-only" name="heart"></ion-icon>
+      </ion-button>
       <ion-button shape="round" [routerLink]="['/']">
         <ion-icon slot="icon-only" name="home"></ion-icon>
       </ion-button>
