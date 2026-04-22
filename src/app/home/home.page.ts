@@ -1,20 +1,20 @@
 import { Component, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { IonHeader, IonToolbar, IonTitle, IonContent } from '@ionic/angular/standalone';
+import { IonHeader, IonToolbar, IonTitle, IonContent, IonItem } from '@ionic/angular/standalone';
 import { GameService } from '../services/game-service';
 import { IonCard, IonCardHeader, IonCardTitle } from '@ionic/angular/standalone';
 import { IonCol, IonGrid, IonRow } from '@ionic/angular/standalone';
 import { RouterLink } from '@angular/router';
 import { IonIcon, IonButton, IonButtons, IonSearchbar } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
-import { home, chevronBackOutline, chevronForwardOutline, heart, pricetagOutline } from 'ionicons/icons';
+import { desktopOutline ,logoXbox, logoPlaystation, home, chevronBackOutline, chevronForwardOutline, heart, pricetagOutline } from 'ionicons/icons';
 
 
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
-  imports: [CommonModule, IonIcon, IonSearchbar, IonButton, IonButtons, RouterLink, IonCol, IonGrid, IonRow, IonCard, IonCardHeader, IonCardTitle, IonHeader, IonToolbar, IonTitle, IonContent],
+  imports: [IonItem, CommonModule, IonIcon, IonSearchbar, IonButton, IonButtons, RouterLink, IonCol, IonGrid, IonRow, IonCard, IonCardHeader, IonCardTitle, IonHeader, IonToolbar, IonTitle, IonContent, IonItem],
 })
 export class HomePage {
   @ViewChild(IonContent) content!: IonContent;
@@ -22,7 +22,7 @@ export class HomePage {
   searchWord: string = "";
 
   constructor(private gameService: GameService) {
-    addIcons({ home, heart, chevronBackOutline, chevronForwardOutline, pricetagOutline })
+    addIcons({ desktopOutline ,logoXbox,logoPlaystation, home, heart, chevronBackOutline, chevronForwardOutline, pricetagOutline })
   }
 
   async ionViewWillEnter() {
@@ -39,23 +39,41 @@ export class HomePage {
       (data) => {
         this.games = data.results;
         console.log(this.games);
-        this.findFavourite();
+        this.findFavouritePlatform();
       }
     )
   }
   
 
-  findFavourite() {
+  findFavouritePlatform() {
     if (this.gameService.favouriteArray != null) {
 
-      for (let i = 0; i < this.gameService.favouriteArray.length; i++) {
-        for (let j = 0; j < this.games.length; j++) {
-          if (this.gameService.favouriteArray[i].id == this.games[j].id) {
-            this.games[j].isFav = true;
+      for (let i = 0; i < this.games.length; i++) {
+        for (let j = 0; j < this.gameService.favouriteArray.length; j++) {
+          if (this.gameService.favouriteArray[j].id == this.games[i].id) {
+            this.games[i].isFav = true;
           }
+          if(this.games[i].parent_platforms?.some((plat: any) => plat.platform.id === 1))
+          {
+            this.games[i].pc = true;
+          }
+          if(this.games[i].parent_platforms?.some((plat: any) => plat.platform.id === 2))
+          {
+            this.games[i].playStation = true;
+          }
+          if(this.games[i].parent_platforms?.some((plat: any) => plat.platform.id === 3))
+          {
+            this.games[i].xbox = true;
+          }
+            
+
         }
       }
     }
+  }
+
+  checkPlatform(id: number){
+    let plat
   }
 
   onPrevButton() {
@@ -79,7 +97,7 @@ export class HomePage {
       this.gameService.GetGameData(this.searchWord).subscribe(
         (gameData) => {
           this.games = gameData.results;
-          this.findFavourite();
+          this.findFavouritePlatform();
         }
       );
     }
@@ -118,11 +136,7 @@ export class HomePage {
       this.gameService.favouriteArray = [];
       this.gameService.favouriteArray.push(game);
       this.gameService.saveFavourite();
-
     }
-
-
-
   }
 
   goFirstPage() {
@@ -130,13 +144,9 @@ export class HomePage {
       (data) => {
         this.games = data.results;
         console.log(this.games);
-        this.findFavourite();
+        this.findFavouritePlatform();
       }
     )
-  }
-
-  getFavourite() {
-    console.log(this.gameService.favouriteArray);
   }
 
 }

@@ -1,34 +1,36 @@
 ion-card {
-    margin-bottom: 120px;
-    padding-bottom: 20px;
+  margin-bottom: 120px;
+  padding-bottom: 20px;
 }
 
 .dlc-title {
-    background-color: #ffc409;
-    color: black;
+  background-color: #ffc409;
+  color: black;
 }
+
 .dlc-cards {
-    max-width: 300px;
-    height:270px;
-    margin-bottom: 30px;
+  max-width: 300px;
+  height: 270px;
+  margin-bottom: 30px;
 }
 
 .dlc-col {
- 
+
   color: #fff;
   text-align: center;
   height: auto;
-  
+
 }
 
 .size-btn {
   width: 150px;
 }
-.game-title{
-    font-size: clamp(24px, 4vw, 32px);
+
+.game-title {
+  font-size: clamp(24px, 4vw, 32px);
 
 }
+
 .dlc-game-title {
   font-size: clamp(14px, 4vw, 20px);
 }
-
