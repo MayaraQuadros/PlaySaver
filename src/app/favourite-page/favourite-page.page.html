@@ -35,7 +35,7 @@
                 <ion-icon size="small" *ngIf="game.pc" name="desktop-outline" style="margin-right: 10px"></ion-icon>
                 <ion-icon size="small" *ngIf="game.xbox" name="logo-xbox" style="margin-right: 10px"></ion-icon>
                 <ion-icon size="small" *ngIf="game.playStation" name="logo-playstation"></ion-icon>
-                <ion-buttons slot="end" >
+                <ion-buttons slot="end">
             <ion-button size="large" fill="clear" (click)="favouriteClicked($event, game)">
               <ion-icon class="favBtn" slot="icon-only" name="heart" size="large"
                 [color]="game.isFav ? 'danger' : 'light'"></ion-icon>

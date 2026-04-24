@@ -25,13 +25,14 @@ import { desktopOutline ,logoXbox, logoPlaystation, home, chevronBackOutline, ch
 export class FavouritePagePage implements OnInit {
 
   constructor(public gameService: GameService) {
-    addIcons({ desktopOutline ,logoXbox, logoPlaystation, home, heart, chevronBackOutline, chevronForwardOutline, pricetagOutline })
+    addIcons({ desktopOutline ,logoXbox, logoPlaystation,home, heart, chevronBackOutline, chevronForwardOutline, pricetagOutline })
   }
 
   ngOnInit() { }
 
   async ionViewWillEnter() {
     await this.gameService.getFavourites();
+    await this.findPlatform();
   }
 
   favouriteClicked(event: Event, game: any) {
